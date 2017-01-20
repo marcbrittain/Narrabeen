@@ -220,6 +220,39 @@ def interpolationMethod(df, resample_method):
         print ('')
         plotShoreline(df,pchipInterp,'pchip',resample_method)
         
+        #########################################################################################
+        
+        quadResample = df.resample(resample_method).mean()
+        quadInterp = quadResample.interpolate(method='quadratic')
+        print ('quadratic Interpolation: ')
+        print ('      quadratic and cubic refer to a spline interpolation of first, second or third order')
+        print ('')
+        print ('')
+        plotShoreline(df,quadInterp,'quadratic',resample_method)
+        
+        #########################################################################################
+        
+        sLinResample = df.resample(resample_method).mean()
+        sLinInterp = sLinResample.interpolate(method='slinear')
+        print ('sLinear Interpolation: ')
+        print ('     spline of order 1 interpolation.')
+        print ('')
+        print ('')
+        plotShoreline(df,sLinInterp,'sLinear',resample_method)
+        
+        #########################################################################################
+               
+        polyResample = df.resample(resample_method).mean()
+        polyInterp = polyResample.interpolate(method='nearest', order=4)
+        print ('polynomial Interpolation: ')
+        print ('     4th order polynomial interpolation.')
+        print ('')
+        print ('')
+        plotShoreline(df,polyInterp,'polynomial',resample_method)
+        
+        #########################################################################################
+        
+        
 #########################################################################################################
 
 def plotShoreline(shoreline,interp_df,interpMethod,resample_method):
